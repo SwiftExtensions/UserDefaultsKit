@@ -17,10 +17,18 @@ public extension UserDefaults {
          */
         public let name: String
         /**
-         Создать ключа хранения в пользовательской базе данных.
+         Значение ключа по умолчанию.
          */
-        public init(name: String) {
+        public let defaultValue: Value
+        
+        /**
+         Создать ключа хранения в пользовательской базе данных.
+         - Parameter name: Имя ключа.
+         - Parameter defaultValue: Значение ключа по умолчанию.
+         */
+        public init(name: String, defaultValue: Value) {
             self.name = name
+            self.defaultValue = defaultValue
         }
         
         
