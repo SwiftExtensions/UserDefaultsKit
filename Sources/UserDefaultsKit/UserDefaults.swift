@@ -18,5 +18,9 @@ public extension UserDefaults {
         set { UserDefaults.standard[key] = newValue }
     }
     
+    static func getObjectOrDefault<Object>(for key: Key<Object>) -> Object {
+        UserDefaults[key] ?? key.defaultValue
+    }
+    
     
 }
