@@ -30,7 +30,7 @@ final class UserDefaultsTests: XCTestCase {
 
 extension UserDefaults.Key {
     static var isEnabledKey: UserDefaults.Key<Bool> {
-        UserDefaults.Key(name: "isEnabledKey")
+        UserDefaults.Key(name: "isEnabledKey", defaultValue: true)
     }
     
     

@@ -2,8 +2,6 @@
 //  UserDefaults.swift
 //  UserDefaultsKit
 //
-//  Created by Лайм HD on 12.08.2022.
-//
 
 import Foundation
 
