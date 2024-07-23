@@ -9,15 +9,8 @@
 import Foundation
 import UserDefaultsKit
 
-extension UserDefaults.Key {
-    static var isEnabledKey: UserDefaults.Key<Bool> {
-        UserDefaults.Key(name: "isEnabledKey")
-    }
+extension UserDefaults {
+    @UserDefault(key: "isAppAlreadyLaunchedOnceKey", defaultValue: false)
+    static var isAppAlreadyLaunchedOnce: Bool
 }
-
-// Сохранить значение.
-UserDefaults[.isEnabledKey] = NEW_VALUE
-
-// Извлечь значение.
-let isEnabled = UserDefaults[.isEnabledKey]
 ```

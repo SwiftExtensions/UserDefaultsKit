@@ -13,7 +13,7 @@ import Foundation
  Пример использования:
  ``` swift
  extension UserDefaults {
-     @UserDefault(key: "isAppAlreadyLaunchedOnce", defaultValue: false)
+     @UserDefault(key: "isAppAlreadyLaunchedOnceKey", defaultValue: false)
      static var isAppAlreadyLaunchedOnce: Bool
  }
  ```
