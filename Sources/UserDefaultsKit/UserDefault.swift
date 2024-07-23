@@ -49,6 +49,18 @@ public struct UserDefault<Value> {
         }
     }
     
+    /**
+     Создает новую обертку для свойства с указанным ключом.
+     - Parameter key: Ключ для хранения в пользовательной базе данных.
+     - Parameter defaultValue: Значение по умолчанию для ключа.
+     - Parameter container: Контейнер хранения.
+     */
+    public init(key: String, defaultValue: Value, container: UserDefaults = .standard) {
+        self.key = key
+        self.defaultValue = defaultValue
+        self.container = container
+    }
+    
     
 }
 
