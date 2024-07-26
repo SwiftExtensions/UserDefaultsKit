@@ -6,7 +6,8 @@
 import Foundation
 
 /**
- Обертка свойств для использования UserDefaults.
+ Обертка свойств для использования
+ [UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults).
  
  Источник: [Projecting a Value From a Property Wrapper](https://www.avanderlee.com/swift/property-wrappers/#projecting-a-value-from-a-property-wrapper).
  
