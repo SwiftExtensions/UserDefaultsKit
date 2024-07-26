@@ -12,6 +12,9 @@ import Foundation
  
  Пример использования:
  ``` swift
+ import Foundation
+ import UserDefaultsKit
+ 
  extension UserDefaults {
      @UserDefault(key: "isAppAlreadyLaunchedOnceKey", defaultValue: false)
      static var isAppAlreadyLaunchedOnce: Bool
