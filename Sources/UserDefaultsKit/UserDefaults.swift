@@ -22,3 +22,19 @@ public extension UserDefaults {
     
     
 }
+
+extension UserDefaults {
+    func decodableObject<T>(forKey: String) -> T? where T: Decodable {
+        let data = self.object(forKey: forKey) as? Data
+        return data.flatMap {
+            try? JSONDecoder().decode(T.self, from: $0)
+        }
+    }
+    
+    func setEncodable<T>(_ value: T, forKey: String) where T: Encodable {
+        if let encoded = try? JSONEncoder().encode(value) {
+            self.set(encoded, forKey: forKey)
+        }
+    }
+        
+}
