@@ -70,6 +70,21 @@ public struct CodableUserDefault<Value: Codable> {
     
 }
 
+// MARK: - ExpressibleByNilLiteral
+
+public extension CodableUserDefault where Value: ExpressibleByNilLiteral {
+    /**
+     Создает новую обертку для свойства с указанным ключом.
+     - Parameter key: Ключ для хранения в пользовательной базе данных.
+     - Parameter container: Контейнер хранения.
+     */
+    init(key: String, _ container: UserDefaults = .standard) {
+        self.init(key: key, defaultValue: nil, container: container)
+    }
+    
+    
+}
+
 extension UserDefaults {
     func decodableObject<T>(forKey: String) -> T? where T: Decodable {
         let data = self.object(forKey: forKey) as? Data
