@@ -16,22 +16,80 @@ final class UserDefaultsTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_save() throws {
-        XCTAssertNil(self.sut[.isEnabledKey])
+    func test_userDefault_save() throws {
+        var wrapper = UserDefault<Bool>(
+            key: "isEnabledKey",
+            defaultValue: false,
+            container: self.sut
+        )
         
-        self.sut[.isEnabledKey] = true
+        XCTAssertFalse(wrapper.wrappedValue)
         
-        XCTAssertNotNil(self.sut[.isEnabledKey])
-        XCTAssertTrue(self.sut[.isEnabledKey] == true)
+        wrapper.wrappedValue = true
+        
+        XCTAssertTrue(wrapper.wrappedValue)
+        XCTAssertTrue(self.sut.bool(forKey: "isEnabledKey"))
+    }
+    
+    func test_userDefault_removeBySettingNil() throws {
+        var wrapper = UserDefault<Bool?>(
+            key: "isEnabledKey",
+            defaultValue: nil,
+            container: self.sut
+        )
+        
+        wrapper.wrappedValue = true
+        XCTAssertNotNil(self.sut.object(forKey: "isEnabledKey"))
+        
+        wrapper.wrappedValue = nil
+        
+        XCTAssertNil(self.sut.object(forKey: "isEnabledKey"))
+    }
+    
+    func test_codableUserDefault_save() throws {
+        var wrapper = CodableUserDefault<Person>(
+            key: "personKey",
+            defaultValue: Person(name: "Alex"),
+            container: self.sut
+        )
+        
+        XCTAssertEqual(wrapper.wrappedValue, Person(name: "Alex"))
+        
+        wrapper.wrappedValue = Person(name: "Bob")
+        
+        XCTAssertEqual(wrapper.wrappedValue, Person(name: "Bob"))
+    }
+    
+    func test_codableUserDefault_storesPlistTypesNatively() throws {
+        var wrapper = CodableUserDefault<Bool>(
+            key: "flagKey",
+            defaultValue: false,
+            container: self.sut
+        )
+        
+        wrapper.wrappedValue = true
+        
+        XCTAssertTrue(self.sut.bool(forKey: "flagKey"))
+    }
+    
+    func test_codableUserDefault_removeBySettingNil() throws {
+        var wrapper = CodableUserDefault<Person?>(
+            key: "personKey",
+            defaultValue: nil,
+            container: self.sut
+        )
+        
+        wrapper.wrappedValue = Person(name: "Alex")
+        XCTAssertNotNil(self.sut.object(forKey: "personKey"))
+        
+        wrapper.wrappedValue = nil
+        
+        XCTAssertNil(self.sut.object(forKey: "personKey"))
     }
     
     
 }
 
-extension UserDefaults.Key {
-    static var isEnabledKey: UserDefaults.Key<Bool> {
-        UserDefaults.Key(name: "isEnabledKey", defaultValue: true)
-    }
-    
-    
+private struct Person: Codable, Equatable {
+    let name: String
 }
