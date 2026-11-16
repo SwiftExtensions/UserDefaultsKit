@@ -9,27 +9,35 @@ public extension UserDefaults {
     /**
      Ключ хранения в пользовательской базе данных.
      */
-    struct Key<Value> {
+    struct Key: RawRepresentable, Hashable {
         /**
          Имя ключа.
          */
-        public let name: String
-        /**
-         Значение ключа по умолчанию.
-         */
-        public let defaultValue: Value
+        public let rawValue: String
         
         /**
-         Создать ключа хранения в пользовательской базе данных.
-         - Parameter name: Имя ключа.
-         - Parameter defaultValue: Значение ключа по умолчанию.
+         Создает ключ хранения в пользовательской базе данных.
+         - Parameter rawValue: Имя ключа.
          */
-        public init(name: String, defaultValue: Value) {
-            self.name = name
-            self.defaultValue = defaultValue
+        public init(rawValue: String) {
+            self.rawValue = rawValue
         }
         
         
+    }
+    
+    
+}
+
+// MARK: - ExpressibleByStringLiteral
+
+extension UserDefaults.Key: ExpressibleByStringLiteral {
+    /**
+     Создает ключ хранения из строкового литерала.
+     - Parameter value: Имя ключа.
+     */
+    public init(stringLiteral value: String) {
+        self.init(rawValue: value)
     }
     
     
